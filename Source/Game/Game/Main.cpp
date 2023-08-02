@@ -47,6 +47,8 @@ public:
 
 int main(int argc, char* argv[])
 {
+	INFO_LOG("Hello World");
+
 	kiko::MemoryTracker::Initialize();
 	kiko::seedRandom((unsigned int)time(nullptr));
 	kiko::setFilePath("assets");
