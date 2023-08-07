@@ -5,17 +5,21 @@
 #include "Audio/AudioSystem.h"
 #include "Framework/Scene.h"
 #include "Framework/Emitter.h"
+#include "Framework/ResourceManager.h"
+
 #include "Renderer/Text.h"
 #include "Renderer/ParticleSystem.h"
+#include "Renderer/Texture.h"
+
 #include "Player.h"
 #include "Enemy.h"
-
 #include "SpaceGame.h"
-
 
 #include <iostream>
 #include <vector>
 #include <thread>
+#include <array>
+#include <map>
 
 
 using namespace std;
@@ -45,8 +49,22 @@ public:
 	kiko::vec2 m_vel;
 };
 
+void print_arg(int count, ...)
+{
+	va_list args;
+
+	va_start(args, count);
+	for (int i = 0; i < count; ++i)
+	{
+		std::cout << va_arg(args, const char*) << std::endl;
+	}
+	va_end(args);
+}
+
 int main(int argc, char* argv[])
 {
+	print_arg(3, "Hello", "worlds", "die");
+
 	INFO_LOG("Hello World");
 
 	kiko::MemoryTracker::Initialize();
@@ -73,6 +91,8 @@ int main(int argc, char* argv[])
 		stars.push_back(Star(pos, vel));
 	}
 
+	kiko::res_t<kiko::Texture> texture = kiko::g_resources.Get<kiko::Texture>("ShipTexture.png", kiko::g_renderer);
+
 	// main game loop
 	bool quit = false;
 	while (!quit)
@@ -92,6 +112,7 @@ int main(int argc, char* argv[])
 		// draw game
 		kiko::g_renderer.SetColor(0, 0, 0, 0);
 		kiko::g_renderer.BeginFrame();
+		kiko::g_renderer.DrawTexture(texture.get(), 200.0f, 200.0f, 0.0f);
 		for (auto& star : stars)
 		{
 			star.Update(kiko::g_renderer.GetWidth(), kiko::g_renderer.GetHeight());
@@ -109,27 +130,3 @@ int main(int argc, char* argv[])
 
 	return 0;
 }
-/*
-		if (kiko::g_inputSystem.GetMouseButtonDown(0) &&
-			!kiko::g_inputSystem.GetPreviousMouseButtonDown(0))
-		{
-			kiko::EmitterData data;
-			data.burst = true;
-			data.burstCount = 100;
-			data.spawnRate = 200;
-			data.angle = 0;
-			data.angleRange = kiko::Pi;
-			data.lifetimeMin = 0.5f;
-			data.lifetimeMin = 1.5f;
-			data.speedMin = 50;
-			data.speedMax = 250;
-			data.damping = 0.5f;
-
-			data.color = kiko::Color{ 1, 1, 1, 1 };
-
-			kiko::Transform transform{ { kiko::g_inputSystem.GetMousePosition() }, 0, 1};
-			auto emitter = std::make_unique<kiko::Emitter>(transform, data);
-			emitter->m_lifespan = 1.0f;
-			scene.Add(std::move(emitter));
-		}
-*/

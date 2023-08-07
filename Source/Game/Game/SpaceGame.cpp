@@ -3,6 +3,8 @@
 #include "Enemy.h"
 
 #include "Framework/Scene.h"
+#include "Framework/ResourceManager.h"
+#include "Framework/SpriteComponent.h"
 
 #include "Audio/AudioSystem.h"
 #include "Input/InputSystem.h"
@@ -13,7 +15,7 @@
 bool SpaceGame::Initialize()
 {
 	// create font / text objects
-	m_font = std::make_shared<kiko::Font>("arcadeclassic.ttf", 24);
+	m_font = kiko::g_resources.Get<kiko::Font>("arcadeclassic.ttf", 24);
 	m_scoreText = std::make_unique<kiko::Text>(m_font);
 	m_scoreText->Create(kiko::g_renderer, "SCORE 0000", kiko::Color{ 1, 0, 1, 1 });
 
@@ -63,6 +65,11 @@ void SpaceGame::Update(float dt)
 		player->m_tag = "Player";
 		player->m_game = this;
 		player->SetDamping(0.9f);
+
+		std::unique_ptr<kiko::SpriteComponent> component = std::make_unique<kiko::SpriteComponent>();
+		component->m_texture = kiko::g_resources.Get<kiko::Texture>("ShipTexture.png", kiko::g_renderer);
+		player->AddComponent(std::move(component));
+
 		m_scene->Add(std::move(player));
 	}
 	m_state = eState::Game;

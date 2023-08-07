@@ -23,10 +23,13 @@ namespace kiko
 		void DrawPoint(int x, int y);
 		void DrawPoint(float x, float y);
 
+		void DrawTexture(class Texture* texture, float x, float y, float angle);
+
 		int GetWidth() const { return m_width; }
 		int GetHeight() const { return m_height; }
 
 		friend class Text;
+		friend class Texture;
 
 	private:
 		int m_width = 0;

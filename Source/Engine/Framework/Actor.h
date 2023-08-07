@@ -1,6 +1,7 @@
 #pragma once
 #include "Core/Core.h"
 #include "Renderer/Model.h"
+#include "Component.h"
 #include <memory>
 
 namespace kiko
@@ -20,6 +21,8 @@ namespace kiko
 		virtual void Update(float dt);
 		virtual void Draw(kiko::Renderer& renderer);
 
+		void AddComponent(std::unique_ptr<Component> component);
+
 		float GetRadius() { return (m_model) ? m_model->GetRadius() * m_transform.scale : -10000; }
 		virtual void OnCollision(Actor* other) {}
 
@@ -36,6 +39,8 @@ namespace kiko
 		float m_lifespan = -1.0f;
 
 	protected:
+		std::vector<std::unique_ptr<Component>> m_components;
+
 		bool m_destroyed = false;
 		std::shared_ptr<Model> m_model;
 

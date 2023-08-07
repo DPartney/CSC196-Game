@@ -1,6 +1,7 @@
 #include "Renderer.h"
 #include "SDL2-2.28.0/include/SDL_ttf.h"
 #include"SDL2-2.28.0/include/SDL_Image.h"
+#include "Texture.h"
 
 namespace kiko
 {
@@ -65,5 +66,16 @@ namespace kiko
 	void Renderer::DrawPoint(float x, float y)
 	{
 		SDL_RenderDrawPointF(m_renderer, x, y);
+	}
+	void Renderer::DrawTexture(Texture* texture, float x, float y, float angle)
+	{
+		vec2 size = texture->GetSize();
+		SDL_Rect dest;
+		dest.x = x;
+		dest.y = y;
+		dest.w = size.x;
+		dest.h = size.y;
+		// https://wiki.libsdl.org/SDL2/SDL_RenderCopyEx
+		//SDL_RenderCopyEx(m_renderer, texture, NULL, NULL, angle, NULL, SDL_FLIP_NONE);
 	}
 }
