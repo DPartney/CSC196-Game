@@ -44,5 +44,4 @@ namespace kiko
 	{
 		m_actors.clear();
 	}
-
 }

@@ -46,7 +46,7 @@ namespace kiko
 			return false;
 		}
 		buffer.resize(size);
-				
+
 		std::ifstream stream(path);
 		stream.read(buffer.data(), size);
 		stream.close();

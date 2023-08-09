@@ -8,5 +8,4 @@ namespace kiko
 	public:
 		virtual void Draw(class Renderer& renderer) = 0;
 	};
-
 }

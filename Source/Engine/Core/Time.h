@@ -11,7 +11,7 @@ namespace kiko
 		using clock_rep = clock::rep;
 
 	public:
-		Time() : 
+		Time() :
 			m_startTime{ clock::now() },
 			m_frameTime{ clock::now() }
 		{}

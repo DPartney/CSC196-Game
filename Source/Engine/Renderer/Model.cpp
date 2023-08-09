@@ -1,4 +1,5 @@
 #include "Model.h"
+#include "Renderer.h"
 #include <sstream>
 
 namespace kiko
@@ -30,7 +31,6 @@ namespace kiko
 		return true;
 	}
 
-
 	void Model::Draw(Renderer& renderer, const vec2& position, float rotation, float scale)
 	{
 		if (m_points.empty()) return;
@@ -40,17 +40,28 @@ namespace kiko
 		{
 			vec2 p1 = (m_points[i] * scale).Rotate(rotation) + position;
 			vec2 p2 = (m_points[i + 1] * scale).Rotate(rotation) + position;
-						
+
 			renderer.DrawLine(p1.x, p1.y, p2.x, p2.y);
 		}
 	}
 
 	void Model::Draw(Renderer& renderer, const Transform& transform)
 	{
-		Draw(renderer, transform.position, transform.rotation, transform.scale);
+		if (m_points.empty()) return;
+
+		mat2 mx = transform.GetMatrix();
+
+		renderer.SetColor(Color::ToInt(m_color.r), Color::ToInt(m_color.g), Color::ToInt(m_color.b), Color::ToInt(m_color.a));
+		for (int i = 0; i < m_points.size() - 1; i++)
+		{
+			vec2 p1 = (mx * m_points[i]) + transform.position;
+			vec2 p2 = (mx * m_points[i + 1]) + transform.position;
+
+			renderer.DrawLine(p1.x, p1.y, p2.x, p2.y);
+		}
 	}
 
-	bool Model::Create(std::string filename)
+	bool Model::Create(std::string filename, ...)
 	{
 		return Load(filename);
 	}

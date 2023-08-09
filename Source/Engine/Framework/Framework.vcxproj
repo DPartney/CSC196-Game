@@ -138,7 +138,11 @@
     <ClInclude Include="Actor.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="Emitter.h" />
+    <ClInclude Include="EnginePhysicsComponent.h" />
+    <ClInclude Include="Framework.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="ModelRenderComponent.h" />
+    <ClInclude Include="PhysicsComponent.h" />
     <ClInclude Include="RenderComponent.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="ResourceManager.h" />
@@ -148,6 +152,8 @@
   <ItemGroup>
     <ClCompile Include="Actor.cpp" />
     <ClCompile Include="Emitter.cpp" />
+    <ClCompile Include="EnginePhysicsComponent.cpp" />
+    <ClCompile Include="ModelRenderComponent.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SpriteComponent.cpp" />

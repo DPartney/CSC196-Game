@@ -37,6 +37,4 @@ namespace kiko
 
 		return nullptr;
 	}
-
-
 }

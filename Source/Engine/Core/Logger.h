@@ -27,13 +27,13 @@ namespace kiko {
 	public:
 		Logger(Loglevel logLevel, std::ostream* ostream, const std::string filename = "") :
 			m_logLevel{ logLevel },
-			m_ostream { ostream }
+			m_ostream{ ostream }
 		{
-			if(!filename.empty()) m_fstream.open(filename);
+			if (!filename.empty()) m_fstream.open(filename);
 		};
 
 		bool Log(Loglevel logLevel, const std::string filename, int line);
-	
+
 		template<typename T>
 		Logger& operator << (T value);
 
@@ -49,7 +49,7 @@ namespace kiko {
 	inline Logger& Logger::operator<<(T value)
 	{
 		if (m_ostream) *m_ostream << value;
-		if (m_fstream.is_open()) 
+		if (m_fstream.is_open())
 		{
 			m_fstream << value;
 			m_fstream.flush();

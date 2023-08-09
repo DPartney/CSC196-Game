@@ -1,15 +1,8 @@
 #include "Core/Core.h"
 #include "Renderer/Renderer.h"
-#include "Renderer/ModelManager.h"
 #include "Input/InputSystem.h"
 #include "Audio/AudioSystem.h"
-#include "Framework/Scene.h"
-#include "Framework/Emitter.h"
-#include "Framework/ResourceManager.h"
-
-#include "Renderer/Text.h"
-#include "Renderer/ParticleSystem.h"
-#include "Renderer/Texture.h"
+#include "Framework/Framework.h"
 
 #include "Player.h"
 #include "Enemy.h"
@@ -20,7 +13,6 @@
 #include <thread>
 #include <array>
 #include <map>
-
 
 using namespace std;
 
@@ -49,23 +41,9 @@ public:
 	kiko::vec2 m_vel;
 };
 
-void print_arg(int count, ...)
-{
-	va_list args;
-
-	va_start(args, count);
-	for (int i = 0; i < count; ++i)
-	{
-		std::cout << va_arg(args, const char*) << std::endl;
-	}
-	va_end(args);
-}
-
 int main(int argc, char* argv[])
 {
-	print_arg(3, "Hello", "worlds", "die");
-
-	INFO_LOG("Hello World");
+	INFO_LOG("Initiliaze Engine");
 
 	kiko::MemoryTracker::Initialize();
 	kiko::seedRandom((unsigned int)time(nullptr));
@@ -91,8 +69,6 @@ int main(int argc, char* argv[])
 		stars.push_back(Star(pos, vel));
 	}
 
-	kiko::res_t<kiko::Texture> texture = kiko::g_resources.Get<kiko::Texture>("ShipTexture.png", kiko::g_renderer);
-
 	// main game loop
 	bool quit = false;
 	while (!quit)
@@ -112,7 +88,6 @@ int main(int argc, char* argv[])
 		// draw game
 		kiko::g_renderer.SetColor(0, 0, 0, 0);
 		kiko::g_renderer.BeginFrame();
-		kiko::g_renderer.DrawTexture(texture.get(), 200.0f, 200.0f, 0.0f);
 		for (auto& star : stars)
 		{
 			star.Update(kiko::g_renderer.GetWidth(), kiko::g_renderer.GetHeight());
@@ -122,7 +97,7 @@ int main(int argc, char* argv[])
 
 		game->Draw(kiko::g_renderer);
 		kiko::g_particleSystem.Draw(kiko::g_renderer);
-		
+
 		kiko::g_renderer.EndFrame();
 	}
 

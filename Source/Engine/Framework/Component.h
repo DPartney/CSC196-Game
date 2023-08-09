@@ -1,9 +1,8 @@
 #pragma once
 
-
-namespace kiko 
+namespace kiko
 {
-	class Component 
+	class Component
 	{
 	public:
 		virtual void Update(float dt) = 0;
@@ -12,5 +11,4 @@ namespace kiko
 	protected:
 		class Actor* m_owner = nullptr;
 	};
-
 }

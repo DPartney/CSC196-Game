@@ -41,4 +41,3 @@ private:
 	std::unique_ptr<kiko::Text> m_timerText;
 	std::unique_ptr<kiko::Text> m_gameoverText;
 };
-

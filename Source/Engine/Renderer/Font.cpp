@@ -14,7 +14,7 @@ namespace kiko
 		if (m_ttfFont) TTF_CloseFont(m_ttfFont);
 	}
 
-	bool Font::Create(std::string filename, ...) 
+	bool Font::Create(std::string filename, ...)
 	{
 		va_list args;
 

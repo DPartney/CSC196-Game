@@ -28,7 +28,6 @@ namespace kiko
 		SDL_Surface* surface = IMG_Load(filename.c_str());
 		if (!surface)
 		{
-			
 			return false;
 		}
 		m_texture = SDL_CreateTextureFromSurface(renderer.m_renderer, surface);
@@ -45,7 +44,7 @@ namespace kiko
 		// ASSERT texture is not null
 		SDL_Point point;
 		// https://wiki.libsdl.org/SDL2/SDL_QueryTexture
-		SDL_QueryTexture(m_texture,NULL, NULL, &point.x, &point.y);
+		SDL_QueryTexture(m_texture, NULL, NULL, &point.x, &point.y);
 		return vec2{ point.x, point.y };
 	}
 }

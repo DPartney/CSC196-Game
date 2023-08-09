@@ -5,7 +5,6 @@
 #include "Framework/Emitter.h"
 #include "Renderer/Renderer.h"
 
-
 void Enemy::Update(float dt)
 {
 	Actor::Update(dt);
@@ -15,7 +14,7 @@ void Enemy::Update(float dt)
 	if (player)
 	{
 		kiko::vec2 direction = player->m_transform.position - m_transform.position;
-		// turn towards player		
+		// turn towards player
 		float turnAngle = kiko::vec2::SignedAngle(forward, direction.Normalized());
 		m_transform.rotation += turnAngle * dt;
 		// check if player is in front
@@ -23,14 +22,11 @@ void Enemy::Update(float dt)
 		{
 			// I see you!
 		}
-
 	}
 
 	m_transform.position += forward * m_speed * kiko::g_time.GetDeltaTime();
 	m_transform.position.x = kiko::Wrap(m_transform.position.x, (float)kiko::g_renderer.GetWidth());
 	m_transform.position.y = kiko::Wrap(m_transform.position.y, (float)kiko::g_renderer.GetHeight());
-
-
 }
 
 void Enemy::OnCollision(Actor* other)
@@ -59,6 +55,5 @@ void Enemy::OnCollision(Actor* other)
 		auto emitter = std::make_unique<kiko::Emitter>(transform, data);
 		emitter->m_lifespan = 0.1f;
 		m_scene->Add(std::move(emitter));
-
 	}
 }

@@ -1,5 +1,5 @@
 #include "Time.h"
-#include "MathUtils.h"
+#include "Math/MathUtils.h"
 
 namespace kiko
 {
@@ -37,4 +37,3 @@ namespace kiko
 		return (clock::now() - m_startTime).count() / static_cast<float>(clock_duration::period::den);
 	}
 }
-

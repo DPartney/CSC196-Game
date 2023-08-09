@@ -22,9 +22,7 @@ namespace kiko
 	private:
 		FMOD::System* m_fmodSystem = nullptr;
 		std::map<std::string, FMOD::Sound*> m_sounds;
-
 	};
 
 	extern AudioSystem g_audioSystem;
 }
-
