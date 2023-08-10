@@ -28,6 +28,7 @@ namespace kiko
 		void DrawPoint(float x, float y);
 
 		void DrawTexture(class Texture* texture, float x, float y, float angle);
+		void DrawTexture(class Texture* texture, const Transform& transform);
 
 		int GetWidth() const { return m_width; }
 		int GetHeight() const { return m_height; }

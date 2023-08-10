@@ -67,6 +67,7 @@ namespace kiko
 	{
 		SDL_RenderDrawPointF(m_renderer, x, y);
 	}
+
 	void Renderer::DrawTexture(Texture* texture, float x, float y, float angle)
 	{
 		vec2 size = texture->GetSize();
@@ -77,7 +78,22 @@ namespace kiko
 		dest.w = (int)size.x;
 		dest.h = (int)size.y;
 
-		// https://wiki.libsdl.org/SDL2/SDL_RenderCopyEx
 		SDL_RenderCopyEx(m_renderer, texture->m_texture, nullptr, &dest, angle, nullptr, SDL_FLIP_NONE);
+	}
+
+	void Renderer::DrawTexture(Texture* texture, const Transform& transform)
+	{
+		mat3 mx = transform.GetMatrix();
+
+		vec2 position = mx.GetTranslation();
+		vec2 size = texture->GetSize() * mx.GetScale();
+
+		SDL_Rect dest;
+		dest.x = (int)(position.x - (size.x * 0.5f));
+		dest.y = (int)(position.y - (size.y * 0.5f));
+		dest.w = (int)size.x;
+		dest.h = (int)size.y;
+
+		SDL_RenderCopyEx(m_renderer, texture->m_texture, nullptr, &dest, RadiansToDegrees(mx.GetRotation()), nullptr, SDL_FLIP_NONE);
 	}
 }

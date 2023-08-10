@@ -56,12 +56,12 @@ void SpaceGame::Update(float dt)
 	case SpaceGame::eState::StartLevel:
 		m_scene->RemoveAll();
 		{
-			std::unique_ptr<Player> player = std::make_unique<Player>(20.0f, kiko::Pi, kiko::Transform{ { 400, 300 }, 0, 6 });
+			std::unique_ptr<Player> player = std::make_unique<Player>(20.0f, kiko::Pi, kiko::Transform{ { 400, 300 }, 0, .5f });
 			player->m_tag = "Player";
 			player->m_game = this;
 
-			auto component = std::make_unique<kiko::ModelRenderComponent>();
-			component->m_model = kiko::g_resources.Get<kiko::Model>("ship.txt", kiko::g_renderer);
+			auto component = std::make_unique<kiko::SpriteComponent>();
+			component->m_texture = kiko::g_resources.Get<kiko::Texture>("ShipTexture.png", kiko::g_renderer);
 			player->AddComponent(std::move(component));
 
 			auto physicsComponent = std::make_unique<kiko::EnginePhysicsComponent>();
@@ -78,9 +78,14 @@ void SpaceGame::Update(float dt)
 		if (m_spawnTimer >= m_spawnTime)
 		{
 			m_spawnTimer = 0;
-			std::unique_ptr<Enemy> enemy = std::make_unique<Enemy>(kiko::randomf(75.0f, 150.0f), kiko::Pi, kiko::Transform{ { kiko::random(800), kiko::random(600) }, kiko::randomf(kiko::TwoPi), 3});
+			std::unique_ptr<Enemy> enemy = std::make_unique<Enemy>(kiko::randomf(75.0f, 150.0f), kiko::Pi, kiko::Transform{ { kiko::random(800), kiko::random(600) }, kiko::randomf(kiko::TwoPi), .25f});
 			enemy->m_tag = "Enemy";
 			enemy->m_game = this;
+
+			auto component = std::make_unique<kiko::SpriteComponent>();
+			component->m_texture = kiko::g_resources.Get<kiko::Texture>("EnemyTexture.png", kiko::g_renderer);
+			enemy->AddComponent(std::move(component));
+
 			m_scene->Add(std::move(enemy));
 		}
 		break;
