@@ -13,6 +13,7 @@ public:
 
 	void Update(float dt) override;
 	void OnCollision(Actor* other) override;
+	bool Initialize() override;
 
 private:
 	float m_speed = 0;

@@ -68,6 +68,11 @@ void SpaceGame::Update(float dt)
 			physicsComponent->m_damping = 0.9f;
 			player->AddComponent(std::move(physicsComponent));
 
+			auto collisionComponent = std::make_unique<kiko::CircleCollisionComponent>();
+			collisionComponent->m_radius = 30.0f;
+			player->AddComponent(std::move(collisionComponent));
+
+			player->Initialize();
 			m_scene->Add(std::move(player));
 		}
 		m_state = eState::Game;
@@ -82,10 +87,15 @@ void SpaceGame::Update(float dt)
 			enemy->m_tag = "Enemy";
 			enemy->m_game = this;
 
-			auto component = std::make_unique<kiko::SpriteComponent>();
-			component->m_texture = kiko::g_resources.Get<kiko::Texture>("EnemyTexture.png", kiko::g_renderer);
-			enemy->AddComponent(std::move(component));
+			auto renderComponent = std::make_unique<kiko::SpriteComponent>();
+			renderComponent->m_texture = kiko::g_resources.Get<kiko::Texture>("EnemyTexture.png", kiko::g_renderer);
+			enemy->AddComponent(std::move(renderComponent));
 
+			auto collisionComponent = std::make_unique<kiko::CircleCollisionComponent>();
+			collisionComponent->m_radius = 30.0f;
+			enemy->AddComponent(std::move(collisionComponent));
+
+			enemy->Initialize();
 			m_scene->Add(std::move(enemy));
 		}
 		break;

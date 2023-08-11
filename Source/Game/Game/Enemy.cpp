@@ -1,8 +1,7 @@
 #include "Enemy.h"
 #include "Player.h"
 #include "SpaceGame.h"
-#include "Framework/Scene.h"
-#include "Framework/Emitter.h"
+#include "Framework/Framework.h"
 #include "Renderer/Renderer.h"
 
 void Enemy::Update(float dt)
@@ -56,4 +55,21 @@ void Enemy::OnCollision(Actor* other)
 		emitter->m_lifespan = 0.1f;
 		m_scene->Add(std::move(emitter));
 	}
+}
+
+bool Enemy::Initialize()
+{
+	Actor::Initialize();
+
+	auto collisionComponent = GetComponent<kiko::CollisionComponent>();
+	if (collisionComponent)
+	{
+		auto renderComponent = GetComponent<kiko::RenderComponent>();
+		if (renderComponent)
+		{
+			float scale = m_transform.scale;
+			collisionComponent->m_radius = renderComponent->GetRadius() * scale;
+		}
+	}
+	return true;
 }
