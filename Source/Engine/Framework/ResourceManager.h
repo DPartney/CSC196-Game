@@ -1,12 +1,15 @@
 #pragma once
 #include "Resource.h"
+#include "Singleton.h"
 #include <string>
 #include <map>
 #include <memory>
 
+#define GET_RESOURCE(type, filename, ...) kiko::ResourceManager::Instance().Get<type>(filename, __VA_ARGS__);
+
 namespace kiko
 {
-	class ResourceManager
+	class ResourceManager : public Singleton<ResourceManager>
 	{
 	public:
 		template<typename T, typename ... TArgs>
@@ -29,6 +32,4 @@ namespace kiko
 
 		return resource;
 	}
-
-	extern ResourceManager g_resources;
 }

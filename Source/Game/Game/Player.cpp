@@ -53,7 +53,7 @@ void Player::Update(float dt)
 		std::unique_ptr<Weapon> weapon = std::make_unique<Weapon>(400.0f, transform1);
 		weapon->m_tag = "Player";
 		std::unique_ptr<kiko::SpriteComponent> component = std::make_unique<kiko::SpriteComponent>();
-		component->m_texture = kiko::g_resources.Get<kiko::Texture>("Rocket.png", kiko::g_renderer);
+		component->m_texture = GET_RESOURCE(kiko::Texture, "Rocket.png", kiko::g_renderer);
 		weapon->AddComponent(std::move(component));
 
 		auto collisionComponent = std::make_unique<kiko::CircleCollisionComponent>();
@@ -66,7 +66,7 @@ void Player::Update(float dt)
 		weapon = std::make_unique<Weapon>(400.0f, transform2);
 		weapon->m_tag = "Player";
 		component = std::make_unique<kiko::SpriteComponent>();
-		component->m_texture = kiko::g_resources.Get<kiko::Texture>("Rocket.png", kiko::g_renderer);
+		component->m_texture = GET_RESOURCE(kiko::Texture, "Rocket.png", kiko::g_renderer);
 		weapon->AddComponent(std::move(component));
 
 		collisionComponent = std::make_unique<kiko::CircleCollisionComponent>();

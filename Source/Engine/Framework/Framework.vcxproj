@@ -141,6 +141,7 @@
     <ClInclude Include="Component.h" />
     <ClInclude Include="Emitter.h" />
     <ClInclude Include="EnginePhysicsComponent.h" />
+    <ClInclude Include="Factory.h" />
     <ClInclude Include="Framework.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="ModelRenderComponent.h" />
@@ -150,6 +151,7 @@
     <ClInclude Include="Resource.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="Scene.h" />
+    <ClInclude Include="Singleton.h" />
     <ClInclude Include="SpriteComponent.h" />
   </ItemGroup>
   <ItemGroup>
@@ -158,7 +160,6 @@
     <ClCompile Include="Emitter.cpp" />
     <ClCompile Include="EnginePhysicsComponent.cpp" />
     <ClCompile Include="ModelRenderComponent.cpp" />
-    <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SpriteComponent.cpp" />
   </ItemGroup>

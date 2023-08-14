@@ -4,6 +4,7 @@
 #include "Emitter.h"
 #include "Game.h"
 #include "Scene.h"
+#include "Factory.h"
 
 #include "Component.h"
 
