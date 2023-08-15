@@ -1,8 +1,11 @@
 #pragma once
 #include "Singleton.h"
+#include "Core/Logger.h"
 #include <memory>
 #include <map>
 #include <string>
+
+#define CREATE_CLASS(classname) kiko::Factory::Instance().Create<kiko::classname>(#classname);
 
 namespace kiko
 {
@@ -33,6 +36,11 @@ namespace kiko
 		template <typename T>
 		std::unique_ptr<T> Create(const std::string& key);
 
+		friend class Singleton;
+
+	protected:
+		Factory() = default;
+
 	private:
 		std::map<std::string, std::unique_ptr<CreatorBase>> m_registry;
 	};
@@ -40,6 +48,8 @@ namespace kiko
 	template<typename T>
 	inline void Factory::Register(const std::string& key)
 	{
+		INFO_LOG("Class registered: " << key);
+
 		m_registry[key] = std::make_unique<Creator<T>>();
 	}
 
@@ -50,7 +60,6 @@ namespace kiko
 		if (iter != m_registry.end())
 		{
 			return std::unique_ptr<T>(dynamic_cast<T*>(iter->second->Create().release()));
-
 		}
 		return std::unique_ptr<T>();
 	}

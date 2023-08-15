@@ -8,7 +8,6 @@ namespace kiko
 	public:
 		virtual bool CheckCollision(CollisionComponent* collision) = 0;
 
-
 		float m_radius = 0;
 	};
 }

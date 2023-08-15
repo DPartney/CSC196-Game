@@ -28,10 +28,13 @@
     <ClCompile Include="ModelRenderComponent.cpp">
       <Filter>Source\Components</Filter>
     </ClCompile>
-    <ClCompile Include="EnginePhysicsComponent.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="CircleCollisionComponent.cpp">
+      <Filter>Source\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="EnginePhysicsComponent.cpp">
+      <Filter>Source\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Object.cpp">
       <Filter>Source</Filter>
     </ClCompile>
   </ItemGroup>

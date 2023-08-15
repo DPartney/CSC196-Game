@@ -160,6 +160,7 @@
     <ClCompile Include="Emitter.cpp" />
     <ClCompile Include="EnginePhysicsComponent.cpp" />
     <ClCompile Include="ModelRenderComponent.cpp" />
+    <ClCompile Include="Object.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SpriteComponent.cpp" />
   </ItemGroup>
