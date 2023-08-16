@@ -1,18 +1,20 @@
 #pragma once
+#include "Framework/Singleton.h"
 #include <string>
 #include <cassert>
 #include <fstream>
+#include <iostream>
 
 #ifdef _DEBUG
-#define INFO_LOG(message)					{ if (kiko::g_logger.Log(kiko::Loglevel::Info, __FILE__, __LINE__))		{ kiko::g_logger << " " << message << "\n"; } }
-#define WARNING_LOG(message)				{ if (kiko::g_logger.Log(kiko::Loglevel::Warning, __FILE__, __LINE__))	{ kiko::g_logger << " " << message << "\n"; } }
-#define ERROR_LOG(message)					{ if (kiko::g_logger.Log(kiko::Loglevel::Error, __FILE__, __LINE__))	{ kiko::g_logger << " " << message << "\n"; } }
-#define ASSERT_LOG(condition, message)		{ if (!condition && kiko::g_logger.Log(kiko::Loglevel::Assert, __FILE__, __LINE__))	{ kiko::g_logger << " " << message << "\n"; } assert(condition); }
+#define INFO_LOG(message)				{ if (kiko::Logger::Instance().Log(kiko::Loglevel::Info, __FILE__, __LINE__))		{ kiko::Logger::Instance() << " " << message << "\n"; } }
+#define WARNING_LOG(message)			{ if (kiko::Logger::Instance().Log(kiko::Loglevel::Warning, __FILE__, __LINE__))	{ kiko::Logger::Instance() << " " << message << "\n"; } }
+#define ERROR_LOG(message)				{ if (kiko::Logger::Instance().Log(kiko::Loglevel::Error, __FILE__, __LINE__))		{ kiko::Logger::Instance() << " " << message << "\n"; } }
+#define ASSERT_LOG(condition, message)	{ if (!condition && kiko::Logger::Instance().Log(kiko::Loglevel::Assert, __FILE__, __LINE__))	{ kiko::Logger::Instance() << " " << message << "\n"; } assert(condition); }
 #else
-#define INFO_LOG(message)					{}
-#define WARNING_LOG(message)				{}
-#define ERROR_LOG(message)					{}
-#define ASSERT_LOG(condition, message)		{}
+#define INFO_LOG(message)				{}
+#define WARNING_LOG(message)			{}
+#define ERROR_LOG(message)				{}
+#define ASSERT_LOG(condition, message)	{}
 #endif // debug
 
 namespace kiko {
@@ -23,9 +25,10 @@ namespace kiko {
 		Assert
 	};
 
-	class Logger {
+	class Logger : public Singleton<Logger>
+	{
 	public:
-		Logger(Loglevel logLevel, std::ostream* ostream, const std::string filename = "") :
+		Logger(Loglevel logLevel = Loglevel::Info, std::ostream* ostream = &std::cout, const std::string filename = "log.txt") :
 			m_logLevel{ logLevel },
 			m_ostream{ ostream }
 		{
@@ -42,8 +45,6 @@ namespace kiko {
 		std::ostream* m_ostream = nullptr;
 		std::ofstream m_fstream;
 	};
-
-	extern Logger g_logger;
 
 	template<typename T>
 	inline Logger& Logger::operator<<(T value)

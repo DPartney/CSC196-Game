@@ -1,38 +1,42 @@
 #include "Weapon.h"
 #include "Framework/Framework.h"
 
-void Weapon::Update(float dt)
+namespace kiko
 {
-	Actor::Update(dt);
-
-	kiko::vec2 forward = kiko::vec2{ 0, -1 }.Rotate(m_transform.rotation);
-	m_transform.position += forward * m_speed * kiko::g_time.GetDeltaTime();
-	m_transform.position.x = kiko::Wrap(m_transform.position.x, (float)kiko::g_renderer.GetWidth());
-	m_transform.position.y = kiko::Wrap(m_transform.position.y, (float)kiko::g_renderer.GetHeight());
-}
-
-void Weapon::OnCollision(Actor* other)
-{
-	if (other->m_tag != m_tag)
+	void WeaponComponent::Update(float dt)
 	{
-		m_destroyed = true;
+		kiko::vec2 forward = kiko::vec2{ 0, -1 }.Rotate(m_owner->transform.rotation);
+		m_owner->transform.position += forward * speed * kiko::g_time.GetDeltaTime();
+		m_owner->transform.position.x = kiko::Wrap(m_owner->transform.position.x, (float)kiko::g_renderer.GetWidth());
+		m_owner->transform.position.y = kiko::Wrap(m_owner->transform.position.y, (float)kiko::g_renderer.GetHeight());
 	}
-}
 
-bool Weapon::Initialize()
-{
-	Actor::Initialize();
-
-	auto collisionComponent = GetComponent<kiko::CollisionComponent>();
-	if (collisionComponent)
+	void WeaponComponent::OnCollision(Actor* other)
 	{
-		auto renderComponent = GetComponent<kiko::RenderComponent>();
-		if (renderComponent)
+		if (other->tag != m_owner->tag)
 		{
-			float scale = m_transform.scale;
-			collisionComponent->m_radius = renderComponent->GetRadius() * scale;
+			m_owner->destroyed = true;
 		}
 	}
 
-	return true;
+	void WeaponComponent::Read(const json_t& value)
+	{
+		READ_DATA(value, speed);
+	}
+
+	bool WeaponComponent::Initialize()
+	{
+		auto collisionComponent = m_owner->GetComponent<kiko::CollisionComponent>();
+		if (collisionComponent)
+		{
+			auto renderComponent = m_owner->GetComponent<kiko::RenderComponent>();
+			if (renderComponent)
+			{
+				float scale = m_owner->transform.scale;
+				collisionComponent->m_radius = renderComponent->GetRadius() * scale;
+			}
+		}
+
+		return true;
+	}
 }
