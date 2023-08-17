@@ -48,6 +48,7 @@ void Player::Update(float dt)
 	// fire weapon
 	if (kiko::g_inputSystem.GetKeyDown(SDL_SCANCODE_SPACE) && !kiko::g_inputSystem.GetPreviousKeyDown(SDL_SCANCODE_SPACE))
 	{
+		/*
 		// create weapon
 		kiko::Transform transform1{ transform.position, transform.rotation + kiko::DegreesToRadians(10.0f), 1 };
 		std::unique_ptr<Weapon> weapon = std::make_unique<Weapon>(400.0f, transform1);
@@ -74,6 +75,7 @@ void Player::Update(float dt)
 		weapon->AddComponent(std::move(collisionComponent));
 
 		m_scene->Add(std::move(weapon));
+		*/
 	}
 
 	if (kiko::g_inputSystem.GetKeyDown(SDL_SCANCODE_T)) kiko::g_time.SetTimeScale(0.5f);

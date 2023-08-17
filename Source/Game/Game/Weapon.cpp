@@ -3,36 +3,36 @@
 
 namespace kiko
 {
-	void WeaponComponent::Update(float dt)
+	void Weapon::Update(float dt)
 	{
-		kiko::vec2 forward = kiko::vec2{ 0, -1 }.Rotate(m_owner->transform.rotation);
-		m_owner->transform.position += forward * speed * kiko::g_time.GetDeltaTime();
-		m_owner->transform.position.x = kiko::Wrap(m_owner->transform.position.x, (float)kiko::g_renderer.GetWidth());
-		m_owner->transform.position.y = kiko::Wrap(m_owner->transform.position.y, (float)kiko::g_renderer.GetHeight());
+		kiko::vec2 forward = kiko::vec2{ 0, -1 }.Rotate(transform.rotation);
+		transform.position += forward * speed * kiko::g_time.GetDeltaTime();
+		transform.position.x = kiko::Wrap(transform.position.x, (float)kiko::g_renderer.GetWidth());
+		transform.position.y = kiko::Wrap(transform.position.y, (float)kiko::g_renderer.GetHeight());
 	}
 
-	void WeaponComponent::OnCollision(Actor* other)
+	void Weapon::OnCollision(Actor* other)
 	{
-		if (other->tag != m_owner->tag)
+		if (other->tag != tag)
 		{
-			m_owner->destroyed = true;
+			destroyed = true;
 		}
 	}
 
-	void WeaponComponent::Read(const json_t& value)
+	void Weapon::Read(const json_t& value)
 	{
 		READ_DATA(value, speed);
 	}
 
-	bool WeaponComponent::Initialize()
+	bool Weapon::Initialize()
 	{
-		auto collisionComponent = m_owner->GetComponent<kiko::CollisionComponent>();
+		auto collisionComponent = GetComponent<kiko::CollisionComponent>();
 		if (collisionComponent)
 		{
-			auto renderComponent = m_owner->GetComponent<kiko::RenderComponent>();
+			auto renderComponent = GetComponent<kiko::RenderComponent>();
 			if (renderComponent)
 			{
-				float scale = m_owner->transform.scale;
+				float scale = transform.scale;
 				collisionComponent->m_radius = renderComponent->GetRadius() * scale;
 			}
 		}

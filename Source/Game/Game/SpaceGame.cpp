@@ -28,6 +28,8 @@ bool SpaceGame::Initialize()
 
 	// create scene
 	m_scene = std::make_unique<kiko::Scene>();
+	m_scene->Load("scene.json");
+	m_scene->Initialize();
 
 	return true;
 }
@@ -133,9 +135,10 @@ void SpaceGame::Update(float dt)
 
 void SpaceGame::Draw(kiko::Renderer& renderer)
 {
+	m_scene->Draw(renderer);
 	if (m_state == eState::Title)
 	{
-		m_titleText->Draw(renderer, 400, 300);
+		m_titleText->Draw(renderer, 350, 300);
 	}
 	if (m_state == eState::GameOver)
 	{
@@ -144,5 +147,4 @@ void SpaceGame::Draw(kiko::Renderer& renderer)
 
 	m_timerText->Draw(renderer, 400, 40);
 	m_scoreText->Draw(renderer, 40, 20);
-	m_scene->Draw(renderer);
 }
