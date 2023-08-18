@@ -10,7 +10,7 @@ namespace kiko
 	public:
 		CLASS_DECLARATION(SpriteComponent)
 
-		bool Initialize() override;
+			bool Initialize() override;
 		void Update(float dt) override;
 		void Draw(class Renderer& renderer) override;
 

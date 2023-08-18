@@ -7,7 +7,6 @@ namespace kiko
 
 	void kiko::CircleCollisionComponent::Update(float dt)
 	{
-
 	}
 
 	bool CircleCollisionComponent::CheckCollision(CollisionComponent* collision)
@@ -20,7 +19,5 @@ namespace kiko
 
 	void CircleCollisionComponent::Read(const json_t& value)
 	{
-
 	}
 }
-

@@ -17,6 +17,5 @@ namespace kiko
 
 	void EnginePhysicsComponent::Read(const json_t& value)
 	{
-
 	}
 }

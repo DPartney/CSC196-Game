@@ -3,7 +3,6 @@
 #include <iostream>
 
 namespace kiko {
-
 	bool kiko::Logger::Log(Loglevel logLevel, const std::string filename, int line)
 	{
 		if (logLevel < m_logLevel) return false;

@@ -3,6 +3,7 @@
     {
       "type": "Actor",
       "name": "Background",
+      "persistent": true,
       "transform": {
         "position": [ 400, 300 ],
         "scale": 1.1,
@@ -12,6 +13,28 @@
         {
           "type": "SpriteComponent",
           "textureName": "SpaceBackground.png"
+        }
+      ]
+    },
+    {
+      "type": "Weapon",
+      "name": "Rocket",
+      "prototype": true,
+      "tag": "Player",
+      "lifespan":  1.5,
+      "transform": {
+        "position": [ 400, 300 ],
+        "scale": 0.5,
+        "rotation": 0
+      },
+      "speed":  600,
+      "components": [
+        {
+          "type": "SpriteComponent",
+          "textureName": "Rocket.png"
+        },
+        {
+          "type": "CircleCollisionComponent"
         }
       ]
     }

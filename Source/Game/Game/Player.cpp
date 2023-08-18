@@ -48,6 +48,16 @@ void Player::Update(float dt)
 	// fire weapon
 	if (kiko::g_inputSystem.GetKeyDown(SDL_SCANCODE_SPACE) && !kiko::g_inputSystem.GetPreviousKeyDown(SDL_SCANCODE_SPACE))
 	{
+		auto weapon = INSTANTIATE(Weapon, "Rocket");
+		weapon->transform = { transform.position, transform.rotation + kiko::DegreesToRadians(10.0f), 1 };
+		weapon->Initialize();
+		m_scene->Add(std::move(weapon));
+
+		weapon = INSTANTIATE(Weapon, "Rocket");
+		weapon->transform = { transform.position, transform.rotation - kiko::DegreesToRadians(10.0f), 1 };
+		weapon->Initialize();
+		m_scene->Add(std::move(weapon));
+
 		/*
 		// create weapon
 		kiko::Transform transform1{ transform.position, transform.rotation + kiko::DegreesToRadians(10.0f), 1 };

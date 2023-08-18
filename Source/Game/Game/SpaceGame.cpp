@@ -46,6 +46,7 @@ void SpaceGame::Update(float dt)
 		if (kiko::g_inputSystem.GetKeyDown(SDL_SCANCODE_SPACE))
 		{
 			m_state = eState::StartGame;
+			//m_scene->GetActorByName("Background")->active = false;
 		}
 		break;
 
@@ -67,7 +68,7 @@ void SpaceGame::Update(float dt)
 			player->AddComponent(std::move(component));
 
 			auto physicsComponent = CREATE_CLASS(EnginePhysicsComponent);
-			physicsComponent->m_damping = 0.95f;
+			physicsComponent->m_damping = 0.98f;
 			player->AddComponent(std::move(physicsComponent));
 
 			auto collisionComponent = CREATE_CLASS(CircleCollisionComponent);
