@@ -10,12 +10,12 @@
 bool SpaceGame::Initialize()
 {
 	// create font / text objects
+
 	m_font = GET_RESOURCE(kiko::Font, "arcadeclassic.ttf", 24);
 	m_scoreText = std::make_unique<kiko::Text>(m_font);
 	m_scoreText->Create(kiko::g_renderer, "SCORE 0000", kiko::Color{ 1, 0, 1, 1 });
 
 	m_titleText = std::make_unique<kiko::Text>(m_font);
-	m_titleText->Create(kiko::g_renderer, "AZTEROIDS", kiko::Color{ 1, 1, 1, 1 });
 
 	m_gameoverText = std::make_unique<kiko::Text>(m_font);
 	m_gameoverText->Create(kiko::g_renderer, "GAME OVER", kiko::Color{ 1, 1, 1, 1 });
@@ -43,10 +43,11 @@ void SpaceGame::Update(float dt)
 	switch (m_state)
 	{
 	case SpaceGame::eState::Title:
+		m_scene->GetActorByName("Title")->active = true;
 		if (kiko::g_inputSystem.GetKeyDown(SDL_SCANCODE_SPACE))
 		{
+			m_scene->GetActorByName("Title")->active = false;
 			m_state = eState::StartGame;
-			//m_scene->GetActorByName("Background")->active = false;
 		}
 		break;
 

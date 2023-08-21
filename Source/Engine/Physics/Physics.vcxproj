@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{ee272d78-0c28-43c0-9f4a-61593fcced0e}</ProjectGuid>
-    <RootNamespace>Framework</RootNamespace>
+    <ProjectGuid>{3b62a005-4363-4c4d-96e3-6b9877edfa67}</ProjectGuid>
+    <RootNamespace>Physics</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -86,6 +86,12 @@
       </SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <Lib>
+      <AdditionalDependencies>box2d.lib</AdditionalDependencies>
+    </Lib>
+    <Lib>
+      <AdditionalLibraryDirectories>$(ThirdPartyDIr)box2d\lib</AdditionalLibraryDirectories>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -103,6 +109,12 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <Lib>
+      <AdditionalDependencies>box2d.lib</AdditionalDependencies>
+    </Lib>
+    <Lib>
+      <AdditionalLibraryDirectories>$(ThirdPartyDIr)box2d\lib</AdditionalLibraryDirectories>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -116,6 +128,12 @@
       </SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <Lib>
+      <AdditionalDependencies>box2d.lib</AdditionalDependencies>
+    </Lib>
+    <Lib>
+      <AdditionalLibraryDirectories>$(ThirdPartyDIr)box2d\lib</AdditionalLibraryDirectories>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -133,38 +151,18 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <Lib>
+      <AdditionalDependencies>box2d.lib</AdditionalDependencies>
+    </Lib>
+    <Lib>
+      <AdditionalLibraryDirectories>$(ThirdPartyDIr)box2d\lib</AdditionalLibraryDirectories>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Actor.h" />
-    <ClInclude Include="CircleCollisionComponent.h" />
-    <ClInclude Include="CollisionComponent.h" />
-    <ClInclude Include="Component.h" />
-    <ClInclude Include="Emitter.h" />
-    <ClInclude Include="EnginePhysicsComponent.h" />
-    <ClInclude Include="Factory.h" />
-    <ClInclude Include="Framework.h" />
-    <ClInclude Include="Game.h" />
-    <ClInclude Include="ModelRenderComponent.h" />
-    <ClInclude Include="Object.h" />
-    <ClInclude Include="PhysicsComponent.h" />
-    <ClInclude Include="RenderComponent.h" />
-    <ClInclude Include="Resource.h" />
-    <ClInclude Include="ResourceManager.h" />
-    <ClInclude Include="Scene.h" />
-    <ClInclude Include="Singleton.h" />
-    <ClInclude Include="SpriteComponent.h" />
-    <ClInclude Include="TextRenderComponent.h" />
+    <ClInclude Include="PhysicsSystem.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Actor.cpp" />
-    <ClCompile Include="CircleCollisionComponent.cpp" />
-    <ClCompile Include="Emitter.cpp" />
-    <ClCompile Include="EnginePhysicsComponent.cpp" />
-    <ClCompile Include="ModelRenderComponent.cpp" />
-    <ClCompile Include="Object.cpp" />
-    <ClCompile Include="Scene.cpp" />
-    <ClCompile Include="SpriteComponent.cpp" />
-    <ClCompile Include="TextRenderComponent.cpp" />
+    <ClCompile Include="PhysicsSystem.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
