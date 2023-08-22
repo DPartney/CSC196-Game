@@ -6,10 +6,11 @@
 
 #include "Physics/PhysicsSystem.h"
 
+#include "SpaceGame.h"
 #include "Player.h"
 #include "Enemy.h"
-#include "SpaceGame.h"
 
+#include <functional>
 #include <iostream>
 #include <vector>
 #include <thread>
@@ -20,6 +21,8 @@ using namespace std;
 
 int main(int argc, char* argv[])
 {
+	std::function<int(int, int)> op;
+
 	INFO_LOG("Initailizing Engine...");
 
 	kiko::MemoryTracker::Initialize();

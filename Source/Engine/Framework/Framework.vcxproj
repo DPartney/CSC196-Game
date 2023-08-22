@@ -141,6 +141,8 @@
     <ClInclude Include="Component.h" />
     <ClInclude Include="Emitter.h" />
     <ClInclude Include="EnginePhysicsComponent.h" />
+    <ClInclude Include="Event\Event.h" />
+    <ClInclude Include="Event\EventManager.h" />
     <ClInclude Include="Factory.h" />
     <ClInclude Include="Framework.h" />
     <ClInclude Include="Game.h" />
@@ -160,6 +162,7 @@
     <ClCompile Include="CircleCollisionComponent.cpp" />
     <ClCompile Include="Emitter.cpp" />
     <ClCompile Include="EnginePhysicsComponent.cpp" />
+    <ClCompile Include="Event\EventManager.cpp" />
     <ClCompile Include="ModelRenderComponent.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="Scene.cpp" />

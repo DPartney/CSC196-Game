@@ -31,6 +31,10 @@ bool SpaceGame::Initialize()
 	m_scene->Load("scene.json");
 	m_scene->Initialize();
 
+	// add events
+	EVENT_SUBSCRIBE("AddPoints", SpaceGame::AddPoints);
+	EVENT_SUBSCRIBE("OnPlayerDead", SpaceGame::OnPlayerDead);
+
 	return true;
 }
 
@@ -149,4 +153,15 @@ void SpaceGame::Draw(kiko::Renderer& renderer)
 
 	m_timerText->Draw(renderer, 400, 40);
 	m_scoreText->Draw(renderer, 40, 20);
+}
+
+void SpaceGame::AddPoints(const kiko::Event& event)
+{
+	m_score += std::get<int>(event.data);
+}
+
+void SpaceGame::OnPlayerDead(const kiko::Event& event)
+{
+	m_lives--;
+	m_state = eState::PlayerDeadStart;
 }

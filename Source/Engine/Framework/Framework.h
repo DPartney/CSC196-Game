@@ -20,3 +20,4 @@
 
 #include "Resource.h"
 #include "ResourceManager.h"
+#include "Event/EventManager.h"
