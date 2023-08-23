@@ -13,7 +13,6 @@ namespace kiko
 {
 	class IEventListener
 	{
-		
 	};
 
 	class EventManager : public Singleton<EventManager>

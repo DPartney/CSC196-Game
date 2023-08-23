@@ -2,7 +2,6 @@
 #include <variant>
 #include <string>
 
-
 namespace kiko
 {
 	class Event

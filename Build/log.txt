@@ -4,6 +4,7 @@ INFO: Factory.h(70) Class registered: SpriteComponent
 INFO: Factory.h(70) Class registered: ModelRenderComponent
 INFO: Factory.h(70) Class registered: EnginePhysicsComponent
 INFO: Factory.h(70) Class registered: CircleCollisionComponent
+INFO: Factory.h(70) Class registered: Box2DPhysicsComponent
 INFO: Factory.h(70) Class registered: Actor
 INFO: Main.cpp(26) Initailizing Engine...
 INFO: Factory.h(78) Prototype Class registered: Rocket

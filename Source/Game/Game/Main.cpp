@@ -53,6 +53,7 @@ int main(int argc, char* argv[])
 			quit = true;
 		}
 		kiko::g_particleSystem.Update(kiko::g_time.GetDeltaTime());
+		kiko::PhysicsSystem::Instance().Update(kiko::g_time.GetDeltaTime());
 
 		// update game
 		game->Update(kiko::g_time.GetDeltaTime());

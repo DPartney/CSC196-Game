@@ -5,7 +5,7 @@
 namespace kiko
 {
 	CLASS_DEFINITION(TextRenderComponent)
-	
+
 		TextRenderComponent::TextRenderComponent(const TextRenderComponent& other)
 	{
 		text = other.text;

@@ -39,13 +39,13 @@
       "name": "Rocket",
       "prototype": true,
       "tag": "Player",
-      "lifespan":  1.5,
+      "lifespan": 1.5,
       "transform": {
         "position": [ 400, 300 ],
         "scale": 0.5,
         "rotation": 0
       },
-      "speed":  600,
+      "speed": 600,
       "components": [
         {
           "type": "SpriteComponent",
@@ -55,6 +55,35 @@
           "type": "CircleCollisionComponent"
         }
       ]
+    },
+    {
+      "type": "Player",
+      "name": "Player",
+      "prototype": true,
+      "tag": "Player",
+      "transform": {
+        "position": [ 400, 300 ],
+        "scale": 1,
+        "rotation": 0
+      },
+      "speed": 30,
+      "turnRate": 3.0,
+      "components": {
+        {
+          "type": "SpriteRenderComponent",
+          "textureName": "ShipTexture.png"
+        },
+        {
+          "type": "Box2DPhysicsComponent",
+          "damping": 0.98,
+          "angularDamping": 2,
+          "gravityScale": 0
+        },
+        {
+          "type": "Box2DCollisionComponent",
+          "size": [ 32, 32 ]
+        }
+      }
     }
   ]
 }

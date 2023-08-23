@@ -33,7 +33,8 @@ void Player::Update(float dt)
 	float rotate = 0;
 	if (kiko::g_inputSystem.GetKeyDown(SDL_SCANCODE_A)) rotate = -1;
 	if (kiko::g_inputSystem.GetKeyDown(SDL_SCANCODE_D)) rotate = 1;
-	transform.rotation += rotate * m_turnRate * kiko::g_time.GetDeltaTime();
+	//transform.rotation += rotate * m_turnRate * kiko::g_time.GetDeltaTime();
+	m_physicsComponent->ApplyTorque(rotate * m_turnRate);
 
 	float thrust = 0;
 	if (kiko::g_inputSystem.GetKeyDown(SDL_SCANCODE_W)) thrust = 1;
@@ -69,7 +70,6 @@ void Player::OnCollision(Actor* other)
 	{
 		destroyed = true;
 		kiko::EventManager::Instance().DispatchEvent("OnPlayerDead", 0);
-
 
 		//m_game->SetLives(m_game->GetLives() - 1);
 		//dynamic_cast<SpaceGame*>(m_game)->SetState(SpaceGame::eState::PlayerDeadStart);

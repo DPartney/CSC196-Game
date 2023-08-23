@@ -12,7 +12,7 @@ namespace kiko
 	public:
 		CLASS_DECLARATION(Actor)
 
-		Actor() = default;
+			Actor() = default;
 		Actor(const kiko::Transform& transform) :
 			transform{ transform }
 		{}
