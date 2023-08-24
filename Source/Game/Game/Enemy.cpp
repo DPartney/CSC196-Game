@@ -6,6 +6,35 @@
 
 namespace kiko
 {
+	CLASS_DEFINITION(Enemy);
+
+	bool Enemy::Initialize()
+	{
+		Actor::Initialize();
+
+		m_physicsComponent = GetComponent<kiko::PhysicsComponent>();
+		auto collisionComponent = GetComponent<kiko::CollisionComponent>();
+		if (collisionComponent)
+		{
+			auto renderComponent = GetComponent<kiko::RenderComponent>();
+			if (renderComponent)
+			{
+				float scale = transform.scale;
+				collisionComponent->m_radius = renderComponent->GetRadius() * scale;
+			}
+		}
+		return true;
+	}
+
+	void Enemy::Read(const json_t& value) 
+	{
+		Actor::Read(value);
+
+		READ_DATA(value, speed);
+		READ_DATA(value, turnRate);
+		READ_DATA(value, fireRate);
+	}
+
 	void Enemy::Update(float dt)
 	{
 		Actor::Update(dt);
@@ -26,13 +55,13 @@ namespace kiko
 			}
 		}
 
-		m_physicsComponent->ApplyForce(forward * m_speed);
+		m_physicsComponent->ApplyForce(forward * speed);
 		//transform.position += forward * m_speed * kiko::g_time.GetDeltaTime();
 		transform.position.x = kiko::Wrap(transform.position.x, (float)kiko::g_renderer.GetWidth());
 		transform.position.y = kiko::Wrap(transform.position.y, (float)kiko::g_renderer.GetHeight());
 	}
 
-	void Enemy::OnCollision(Actor* other)
+	void Enemy::OnCollisionEnter(Actor* other)
 	{
 		if (other->tag == "Player")
 		{
@@ -60,23 +89,5 @@ namespace kiko
 			emitter->lifespan = 0.1f;
 			m_scene->Add(std::move(emitter));
 		}
-	}
-
-	bool Enemy::Initialize()
-	{
-		Actor::Initialize();
-
-		m_physicsComponent = GetComponent<kiko::PhysicsComponent>();
-		auto collisionComponent = GetComponent<kiko::CollisionComponent>();
-		if (collisionComponent)
-		{
-			auto renderComponent = GetComponent<kiko::RenderComponent>();
-			if (renderComponent)
-			{
-				float scale = transform.scale;
-				collisionComponent->m_radius = renderComponent->GetRadius() * scale;
-			}
-		}
-		return true;
 	}
 }

@@ -12,7 +12,7 @@ namespace kiko
 	public:
 		CLASS_DECLARATION(Actor)
 
-			Actor() = default;
+		Actor() = default;
 		Actor(const kiko::Transform& transform) :
 			transform{ transform }
 		{}
@@ -28,8 +28,8 @@ namespace kiko
 		template<typename T>
 		T* GetComponent();
 
-		float GetRadius() { return 20.0f; }
-		virtual void OnCollision(Actor* other) {}
+		virtual void OnCollisionEnter(Actor* other) {}
+		virtual void OnCollisionExit(Actor* other) {}
 
 		class Scene* m_scene = nullptr;
 		friend class Scene;

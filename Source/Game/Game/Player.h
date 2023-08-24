@@ -2,22 +2,29 @@
 #include "Framework/Actor.h"
 #include "Framework/PhysicsComponent.h"
 
-class Player : public kiko::Actor
+namespace kiko
 {
-public:
-	Player(float speed, float turnRate, const kiko::Transform& transform) :
-		Actor{ transform },
-		m_speed{ speed },
-		m_turnRate{ turnRate }
-	{}
+	class Player : public Actor
+	{
+	public:
+		CLASS_DECLARATION(Player)
 
-	bool Initialize() override;
-	void Update(float dt) override;
-	void OnCollision(Actor* other) override;
+		Player(float speed, float turnRate, const kiko::Transform& transform) :
+			Actor{ transform },
+			speed{ speed },
+			turnRate{ turnRate }
+		{}
 
-private:
-	float m_speed = 0;
-	float m_turnRate = 0;
+		Player() = default;
 
-	kiko::PhysicsComponent* m_physicsComponent = nullptr;
-};
+		bool Initialize() override;
+		void Update(float dt) override;
+		void OnCollisionEnter(Actor* other) override;
+
+	private:
+		float speed = 0;
+		float turnRate = 0;
+
+		PhysicsComponent* m_physicsComponent = nullptr;
+	};
+}

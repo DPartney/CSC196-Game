@@ -4,30 +4,32 @@
 
 namespace kiko
 {
-	class Enemy : public kiko::Actor
+	class Enemy : public Actor
 	{
 	public:
 		CLASS_DECLARATION(Enemy)
 
 			Enemy(float speed, float turnRate, const kiko::Transform& transform) :
 			Actor{ transform },
-			m_speed{ speed },
-			m_turnRate{ turnRate }
+			speed{ speed },
+			turnRate{ turnRate }
 		{
-			m_fireRate = 2.0f;
-			m_fireTimer = m_fireRate;
-		}
+			fireRate = 2.0f;
+			fireTimer = fireRate;
+		} 
+
+		Enemy() = default;
 
 		void Update(float dt) override;
-		void OnCollision(Actor* other) override;
+		void OnCollisionEnter(Actor* other) override;
 		bool Initialize() override;
 
 	private:
-		float m_speed = 0;
-		float m_turnRate = 0;
+		float speed = 0;
+		float turnRate = 0;
 
-		float m_fireRate = 0;
-		float m_fireTimer = 0;
+		float fireRate = 0;
+		float fireTimer = 0;
 
 		kiko::PhysicsComponent* m_physicsComponent = nullptr;
 	};

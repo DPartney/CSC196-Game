@@ -28,7 +28,7 @@ bool SpaceGame::Initialize()
 
 	// create scene
 	m_scene = std::make_unique<kiko::Scene>();
-	m_scene->Load("scene.json");
+	m_scene->Load("scenes/SpaceScene.json");
 	m_scene->Initialize();
 
 	// add events
@@ -64,22 +64,8 @@ void SpaceGame::Update(float dt)
 	case SpaceGame::eState::StartLevel:
 		m_scene->RemoveAll();
 		{
-			std::unique_ptr<Player> player = std::make_unique<Player>(20.0f, kiko::Pi, kiko::Transform{ { 400, 300 }, 0, .5f });
-			player->tag = "Player";
-			player->m_game = this;
-
-			auto component = CREATE_CLASS(SpriteComponent);
-			component->m_texture = GET_RESOURCE(kiko::Texture, "ShipTexture.png", kiko::g_renderer);
-			player->AddComponent(std::move(component));
-
-			auto physicsComponent = CREATE_CLASS(EnginePhysicsComponent);
-			physicsComponent->m_damping = 0.98f;
-			player->AddComponent(std::move(physicsComponent));
-
-			auto collisionComponent = CREATE_CLASS(CircleCollisionComponent);
-			collisionComponent->m_radius = 30.0f;
-			player->AddComponent(std::move(collisionComponent));
-
+			auto player = INSTANTIATE(Player, "Player");
+			player->transform = kiko::Transform{ { 400, 300 }, 0, 1 };
 			player->Initialize();
 			m_scene->Add(std::move(player));
 		}
@@ -91,18 +77,8 @@ void SpaceGame::Update(float dt)
 		if (m_spawnTimer >= m_spawnTime)
 		{
 			m_spawnTimer = 0;
-			std::unique_ptr<kiko::Enemy> enemy = std::make_unique<kiko::Enemy>(kiko::randomf(75.0f, 150.0f), kiko::Pi, kiko::Transform{ { kiko::random(800), kiko::random(600) }, kiko::randomf(kiko::TwoPi), .25f});
-			enemy->tag = "Enemy";
-			enemy->m_game = this;
-
-			auto renderComponent = kiko::Factory::Instance().Create<kiko::SpriteComponent>("SpriteComponent");
-			renderComponent->m_texture = GET_RESOURCE(kiko::Texture, "EnemyTexture.png", kiko::g_renderer);
-			enemy->AddComponent(std::move(renderComponent));
-
-			auto collisionComponent = std::make_unique<kiko::CircleCollisionComponent>();
-			collisionComponent->m_radius = 30.0f;
-			enemy->AddComponent(std::move(collisionComponent));
-
+			auto enemy = INSTANTIATE(Enemy, "Enemy");
+			enemy->transform = kiko::Transform{ { kiko::random(800), kiko::random(600) }, kiko::randomf(kiko::TwoPi), 1 };
 			enemy->Initialize();
 			m_scene->Add(std::move(enemy));
 		}

@@ -45,14 +45,52 @@
         "scale": 0.5,
         "rotation": 0
       },
-      "speed": 600,
+      "speed": 10,
       "components": [
         {
           "type": "SpriteComponent",
           "textureName": "Rocket.png"
         },
         {
-          "type": "CircleCollisionComponent"
+          "type": "Box2DPhysicsComponent",
+          "damping": 0.98,
+          "angularDamping": 2,
+          "gravityScale": 0
+        },
+        {
+          "type": "Box2DCollisionComponent",
+          "size": [ 32, 32 ],
+          "constrainAngle": true,
+          "isTrigger": true
+        }
+      ]
+    },
+    {
+      "type": "Enemy",
+      "name": "Enemy",
+      "prototype": true,
+      "tag": "Enemy",
+      "transform": {
+        "position": [ 400, 300 ],
+        "scale": 0.25,
+        "rotation": 0
+      },
+      "speed": 1,
+      "turnRate": 1,
+      "components": [
+        {
+          "type": "SpriteComponent",
+          "textureName": "EnemyTexture.png"
+        },
+        {
+          "type": "Box2DPhysicsComponent",
+          "damping": 0.98,
+          "angularDamping": 2,
+          "gravityScale": 0
+        },
+        {
+          "type": "Box2DCollisionComponent",
+          "size": [ 32, 32 ]
         }
       ]
     },
@@ -63,14 +101,14 @@
       "tag": "Player",
       "transform": {
         "position": [ 400, 300 ],
-        "scale": 1,
+        "scale": 0.5,
         "rotation": 0
       },
-      "speed": 30,
-      "turnRate": 3.0,
-      "components": {
+      "speed": 3,
+      "turnRate": 0.15,
+      "components": [
         {
-          "type": "SpriteRenderComponent",
+          "type": "SpriteComponent",
           "textureName": "ShipTexture.png"
         },
         {
@@ -83,7 +121,7 @@
           "type": "Box2DCollisionComponent",
           "size": [ 32, 32 ]
         }
-      }
+      ]
     }
   ]
 }
