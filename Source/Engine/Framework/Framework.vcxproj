@@ -156,6 +156,7 @@
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="Singleton.h" />
+    <ClInclude Include="SpriteAnimComponent.h" />
     <ClInclude Include="SpriteComponent.h" />
     <ClInclude Include="TextRenderComponent.h" />
   </ItemGroup>
@@ -170,6 +171,7 @@
     <ClCompile Include="ModelRenderComponent.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="Scene.cpp" />
+    <ClCompile Include="SpriteAnimComponent.cpp" />
     <ClCompile Include="SpriteComponent.cpp" />
     <ClCompile Include="TextRenderComponent.cpp" />
   </ItemGroup>
