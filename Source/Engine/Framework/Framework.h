@@ -21,6 +21,8 @@
 #include "Box2DPhysicsComponent.h"
 #include "Box2DCollisionComponent.h"
 
+#include "TilemapComponent.h"
+
 #include "Resource.h"
 #include "ResourceManager.h"
 #include "Event/EventManager.h"

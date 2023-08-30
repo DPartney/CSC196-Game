@@ -13,6 +13,7 @@ bool PlatformGame::Initialize()
 	// create scene
 	m_scene = std::make_unique<kiko::Scene>();
 	m_scene->Load("scenes/PlatformScene.json");
+	m_scene->Load("scenes/Tilemap.json");
 	m_scene->Initialize();
 
 	// add events
@@ -31,12 +32,12 @@ void PlatformGame::Update(float dt)
 	switch (m_state)
 	{
 	case PlatformGame::eState::Title:
-		m_scene->GetActorByName("Title")->active = true;
-		if (kiko::g_inputSystem.GetKeyDown(SDL_SCANCODE_SPACE))
-		{
-			m_scene->GetActorByName("Title")->active = false;
-			m_state = eState::StartGame;
-		}
+	{
+		auto actor = INSTANTIATE(Actor, "Crate");
+		actor->transform.position = { (float)kiko::random(kiko::g_renderer.GetWidth(), 100) };
+		actor->Initialize();
+		m_scene->Add(std::move(actor));
+	}
 		break;
 
 	case PlatformGame::eState::StartGame:

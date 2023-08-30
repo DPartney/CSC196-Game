@@ -21,7 +21,7 @@
       "name": "Coin",
       "persistent": true,
       "transform": {
-        "position": [ 400, 200 ],
+        "position": [ 600, 200 ],
         "scale": 1,
         "rotation": 0
       },
@@ -29,6 +29,7 @@
         {
           "type": "SpriteAnimComponent",
           "defaultSequence": "idle",
+          "source": [1, 1, 2, 2],
           "sequences": [
             {
               "name": "idle",
@@ -40,6 +41,129 @@
               "textureName": "coin.png"
             }
           ]
+        },
+        {
+          "type": "Box2DPhysicsComponent",
+          "damping": 0,
+          "gravityScale": 1,
+          "constrainAngle": true
+        },
+        {
+          "type": "Box2DCollisionComponent",
+          "resitution": 0.75
+        }
+      ]
+    },
+    {
+      "type": "Player",
+      "name": "Player",
+      "tag": "Player",
+      "persistent": true,
+      "speed": 40,
+      "maxSpeed": 8,
+      "jump": 5,
+      "transform": {
+        "position": [ 400, 300 ],
+        "scale": 1.5,
+        "rotation": 0
+      },
+      "components": [
+        {
+          "type": "SpriteAnimComponent",
+          "defaultSequence": "idle",
+          "source": [0, 0, 10, 10],
+          "origin": [0.5, 1],
+          "sequences": [
+            {
+              "name": "idle",
+              "fps": 12,
+              "numColumns": 30,
+              "numRows": 13,
+              "startFrame": 1,
+              "endFrame": 8,
+              "textureName": "Player.png"
+            },
+            {
+              "name": "run",
+              "fps": 12,
+              "numColumns": 30,
+              "numRows": 13,
+              "startFrame": 31,
+              "endFrame": 38,
+              "textureName": "Player.png"
+            }
+          ]
+        },
+        {
+          "type": "Box2DPhysicsComponent",
+          "constrainAngle": true
+        },
+        {
+          "type": "Box2DCollisionComponent"
+        }
+      ]
+    },
+    {
+      "type": "Enemy",
+      "name": "Enemy",
+      "tag": "Enemy",
+      "persistent": true,
+      "speed": 5,
+      "transform": {
+        "position": [ 100, 200 ],
+        "scale": 1.5,
+        "rotation": 0
+      },
+      "components": [
+        {
+          "type": "SpriteAnimComponent",
+          "defaultSequence": "idle",
+          "sequences": [
+            {
+              "name": "idle",
+              "fps": 8,
+              "numColumns": 4,
+              "numRows": 1,
+              "startFrame": 1,
+              "endFrame": 4,
+              "textureName": "bat.png"
+            }
+          ]
+        },
+        {
+          "type": "Box2DPhysicsComponent",
+          "gravityScale": 0,
+          "constrainAngle": true,
+          "Damping": 0.9
+        },
+        {
+          "type": "Box2DCollisionComponent",
+          "resitution": 0.1
+        }
+      ]
+    },
+    {
+      "type": "Actor",
+      "name": "Crate",
+      "tag": "Ground",
+      "persistent": true,
+      "prototype": true,
+      "transform": {
+        "position": [ 320, 300 ],
+        "scale": 1,
+        "rotation": 0
+      },
+      "components": [
+        {
+          "type": "SpriteComponent",
+          "textureName": "Crate.png"
+        },
+        {
+          "type": "Box2DPhysicsComponent"
+        },
+        {
+          "type": "Box2DCollisionComponent",
+          "resitution": 0.1
         }
       ]
     },
@@ -48,7 +172,7 @@
       "name": "Title",
       "persistent": true,
       "transform": {
-        "position": [ 400, 300 ],
+        "position": [ 400, 100 ],
         "scale": 1,
         "rotation": 0
       },

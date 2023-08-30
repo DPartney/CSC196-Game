@@ -53,7 +53,7 @@
         },
         {
           "type": "Box2DPhysicsComponent",
-          "damping": 0.98,
+          "damping": 0,
           "angularDamping": 2,
           "gravityScale": 0
         },
